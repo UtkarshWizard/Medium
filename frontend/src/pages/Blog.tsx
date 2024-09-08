@@ -10,7 +10,7 @@ export const Blog = () => {
     });
 
       // skeleton loading
-  if (loading) {
+  if (loading || !blog) {
     return (<div>
         <AppBar />
       <div className="flex items-center justify-center h-screen">
