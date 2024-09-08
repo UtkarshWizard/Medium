@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { PrismaClient } from "@prisma/client/edge";
+import { PrismaClient, User } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
-import { sign } from "hono/jwt";
+import { sign, verify } from "hono/jwt";
 import { signupInput , signinInput } from "@utkarshiitm/medium-common";
 
 export const userRouter = new Hono<{
@@ -10,6 +10,11 @@ export const userRouter = new Hono<{
     JWT_SECRET: string;
   };
 }>();
+
+userRouter.get("/m", async (c) => {
+  return c.json({ redirect: "/SignUp" })
+});
+
 
 userRouter.post("/signup", async (c) => {
   const prisma = new PrismaClient({
